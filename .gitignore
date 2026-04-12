@@ -1,0 +1,122 @@
+# ===============================
+# OS FILES
+# ===============================
+.DS_Store
+Thumbs.db
+
+# ===============================
+# ENV FILES (🔐 NEVER PUSH)
+# ===============================
+.env
+.env.*
+*.env
+
+# ===============================
+# NODE / FRONTEND (React, Next.js)
+# ===============================
+node_modules/
+build/
+dist/
+.next/
+out/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===============================
+# BACKEND (Node / Express)
+# ===============================
+logs/
+*.log
+
+# ===============================
+# PYTHON (Flask / Django / ML)
+# ===============================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# ===============================
+# DATABASE FILES
+# ===============================
+*.db
+*.sqlite
+*.sqlite3
+
+# ===============================
+# IDE / EDITOR
+# ===============================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ===============================
+# TESTING / COVERAGE
+# ===============================
+coverage/
+.nyc_output/
+.coverage
+htmlcov/
+
+# ===============================
+# BUILD / TEMP FILES
+# ===============================
+.tmp/
+.temp/
+.cache/
+*.cache
+
+# ===============================
+# DOCKER
+# ===============================
+.dockerignore
+
+# ===============================
+# ML / AI SPECIFIC 🚀
+# ===============================
+
+# Model files (too large for GitHub)
+*.pkl
+*.joblib
+*.h5
+*.pt
+
+# Dataset files (too large)
+*.csv
+combined_phishing_dataset.csv
+
+# Results folder (graphs, CSVs, model bundles)
+threatlens_results/
+
+# ===============================
+# SECURITY 🚨
+# ===============================
+secrets.json
+config.json
+credentials.json
+
+# ===============================
+# UPLOADS / MEDIA
+# ===============================
+uploads/
+media/
+
+# ===============================
+# ARCHIVES
+# ===============================
+*.tgz
+*.zip
+*.tar.gz

@@ -1,0 +1,128 @@
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.shield { font-size: 2.2rem; }
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.form { margin-bottom: 1.5rem; }
+
+.inputRow {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  flex: 1;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus { border-color: var(--accent); }
+
+.input::placeholder { color: var(--muted); }
+
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 10px;
+  padding: 14px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.2s, opacity 0.2s;
+  white-space: nowrap;
+}
+
+.btn:hover    { background: var(--accent2); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.error {
+  background: var(--phish-bg);
+  color: var(--phish);
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.loadingWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1.5rem 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.resultWrap { margin-bottom: 2rem; }
+
+.examples { margin-top: 1rem; }
+
+.exLabel {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.exBtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.exBtn {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-family: 'Courier New', monospace;
+  transition: all 0.15s;
+}
+
+.exBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent2);
+}
