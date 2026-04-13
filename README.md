@@ -7,14 +7,17 @@ React + Node/Express + MongoDB + Python Flask ML
 ThreatLens-Web/
   frontend/        React app (Vite)
   backend/         Node.js Express API
-  ml/              Your existing app.py (Flask ML service)
+  app.py             Your existing app.py (Flask ML service)
+  pip install requirements.txt
+  threatlens_results/    (python trainModel.py)
+  
 ```
 
 ## Quick Start (run 3 terminals)
 
 ### Terminal 1 — Flask ML Service
 ```bash
-cd ml
+
 python app.py
 # Runs on http://localhost:5000
 ```
