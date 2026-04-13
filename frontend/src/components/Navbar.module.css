@@ -1,44 +1,89 @@
 .nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  height: 60px;
-  background: var(--bg2);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--accent2);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logoIcon {
+  width: 36px;
+  height: 36px;
+  background: var(--blue-pale);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoText {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--navy);
   letter-spacing: -0.3px;
 }
 
-.icon { font-size: 1.4rem; }
-
 .links {
   display: flex;
+  align-items: center;
   gap: 0.25rem;
+  flex: 1;
 }
 
-.links a {
-  padding: 6px 16px;
+.link {
+  padding: 6px 14px;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 500;
   color: var(--muted);
   transition: all 0.15s;
+  white-space: nowrap;
 }
 
-.links a:hover { color: var(--text); background: var(--bg3); }
+.link:hover { color: var(--navy); background: var(--bg); }
 
 .active {
-  color: var(--accent2) !important;
-  background: rgba(99, 102, 241, 0.15) !important;
+  color: var(--blue) !important;
+  background: var(--blue-pale) !important;
+}
+
+.ctaBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--blue);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 9px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 0.15s, transform 0.15s;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.ctaBtn:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
 }

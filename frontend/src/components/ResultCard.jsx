@@ -19,27 +19,23 @@ export default function ResultCard({ scan }) {
         <div className={styles.barRow}>
           <span className={styles.barLabel}>Safe</span>
           <div className={styles.barTrack}>
-            <div
-              className={`${styles.barFill} ${styles.barSafe}`}
-              style={{ width: `${(scan.p_legitimate * 100).toFixed(1)}%` }}
-            />
+            <div className={`${styles.barFill} ${styles.barSafe}`}
+              style={{ width: `${(scan.p_legitimate * 100).toFixed(1)}%` }} />
           </div>
           <span className={styles.barPct}>{(scan.p_legitimate * 100).toFixed(1)}%</span>
         </div>
         <div className={styles.barRow}>
           <span className={styles.barLabel}>Phish</span>
           <div className={styles.barTrack}>
-            <div
-              className={`${styles.barFill} ${styles.barPhish}`}
-              style={{ width: `${(scan.p_phishing * 100).toFixed(1)}%` }}
-            />
+            <div className={`${styles.barFill} ${styles.barPhish}`}
+              style={{ width: `${(scan.p_phishing * 100).toFixed(1)}%` }} />
           </div>
           <span className={styles.barPct}>{(scan.p_phishing * 100).toFixed(1)}%</span>
         </div>
       </div>
 
       <div className={styles.meta}>
-        <span>Confidence: <b>{(scan.confidence * 100).toFixed(1)}%</b></span>
+        <span>Confidence: <strong>{(scan.confidence * 100).toFixed(1)}%</strong></span>
         {scan.scannedAt && (
           <span>{new Date(scan.scannedAt).toLocaleString()}</span>
         )}

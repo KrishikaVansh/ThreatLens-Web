@@ -7,9 +7,10 @@ import {
 } from "recharts";
 import styles from "./Dashboard.module.css";
 
-const SAFE_COLOR  = "#22c55e";
-const PHISH_COLOR = "#ef4444";
-const ACCENT      = "#6366f1";
+const SAFE_COLOR  = "#16a34a";
+const PHISH_COLOR = "#dc2626";
+const BLUE_COLOR  = "#2563eb";
+const AMBER_COLOR = "#d97706";
 
 function StatCard({ label, value, sub, color }) {
   return (
@@ -27,8 +28,8 @@ const CustomTooltip = ({ active, payload, label }) => {
     <div className={styles.tooltip}>
       <p className={styles.tooltipLabel}>{label}</p>
       {payload.map((p) => (
-        <p key={p.name} style={{ color: p.color, fontSize: "0.8rem" }}>
-          {p.name}: {p.value}
+        <p key={p.name} style={{ color: p.color, fontSize: "0.82rem", marginTop: 2 }}>
+          {p.name}: <strong>{p.value}</strong>
         </p>
       ))}
     </div>
@@ -68,7 +69,6 @@ export default function Dashboard() {
     { name: "Phishing", value: stats.phishing },
   ];
 
-  // Fill missing days in the last 7 days
   const last7 = [];
   for (let i = 6; i >= 0; i--) {
     const d = new Date();
@@ -86,51 +86,35 @@ export default function Dashboard() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Dashboard</h1>
-        <p className={styles.subtitle}>All-time scan statistics</p>
+        <div>
+          <span className={styles.pill}>Analytics overview</span>
+          <h1 className={styles.title}>Dashboard</h1>
+          <p className={styles.subtitle}>All-time scan statistics across all sessions</p>
+        </div>
       </div>
 
-      {/* Stat cards */}
       <div className={styles.cards}>
-        <StatCard
-          label="Total Scans"
-          value={stats.total.toLocaleString()}
-          color={ACCENT}
-        />
-        <StatCard
-          label="Safe URLs"
-          value={stats.safe.toLocaleString()}
-          sub={`${(100 - parseFloat(stats.phishingRate)).toFixed(1)}% of total`}
-          color={SAFE_COLOR}
-        />
-        <StatCard
-          label="Phishing Detected"
-          value={stats.phishing.toLocaleString()}
-          sub={`${stats.phishingRate}% of total`}
-          color={PHISH_COLOR}
-        />
-        <StatCard
-          label="Detection Rate"
-          value="97.0%"
-          sub="Model accuracy"
-          color="#f59e0b"
-        />
+        <StatCard label="Total Scans"       value={stats.total.toLocaleString()}    color={BLUE_COLOR}  />
+        <StatCard label="Safe URLs"         value={stats.safe.toLocaleString()}     color={SAFE_COLOR}
+                  sub={`${(100 - parseFloat(stats.phishingRate)).toFixed(1)}% of total`} />
+        <StatCard label="Phishing Detected" value={stats.phishing.toLocaleString()} color={PHISH_COLOR}
+                  sub={`${stats.phishingRate}% of total`} />
+        <StatCard label="Model Accuracy"    value="97.0%"                           color={AMBER_COLOR}
+                  sub="on 161K test URLs" />
       </div>
 
-      {/* Charts row */}
       <div className={styles.chartsRow}>
-        {/* Area chart — activity over 7 days */}
         <div className={styles.chartCard}>
           <h2 className={styles.chartTitle}>Scans — Last 7 Days</h2>
           <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={last7} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="gSafe" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor={SAFE_COLOR}  stopOpacity={0.25} />
+                  <stop offset="5%"  stopColor={SAFE_COLOR}  stopOpacity={0.2} />
                   <stop offset="95%" stopColor={SAFE_COLOR}  stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="gPhish" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor={PHISH_COLOR} stopOpacity={0.25} />
+                  <stop offset="5%"  stopColor={PHISH_COLOR} stopOpacity={0.2} />
                   <stop offset="95%" stopColor={PHISH_COLOR} stopOpacity={0} />
                 </linearGradient>
               </defs>
@@ -143,7 +127,6 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </div>
 
-        {/* Pie chart */}
         <div className={`${styles.chartCard} ${styles.pieCard}`}>
           <h2 className={styles.chartTitle}>Overall Split</h2>
           {stats.total === 0 ? (
@@ -151,31 +134,18 @@ export default function Dashboard() {
           ) : (
             <ResponsiveContainer width="100%" height={220}>
               <PieChart>
-                <Pie
-                  data={pieData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={55}
-                  outerRadius={85}
-                  paddingAngle={3}
-                  dataKey="value"
-                >
-                  <Cell fill={SAFE_COLOR} />
+                <Pie data={pieData} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3} dataKey="value">
+                  <Cell fill={SAFE_COLOR}  />
                   <Cell fill={PHISH_COLOR} />
                 </Pie>
                 <Tooltip formatter={(v) => v.toLocaleString()} />
-                <Legend
-                  formatter={(v) => (
-                    <span style={{ color: "#94a3b8", fontSize: "0.8rem" }}>{v}</span>
-                  )}
-                />
+                <Legend formatter={(v) => <span style={{ color: "#64748b", fontSize: "0.8rem" }}>{v}</span>} />
               </PieChart>
             </ResponsiveContainer>
           )}
         </div>
       </div>
 
-      {/* Bar chart — daily breakdown */}
       <div className={styles.chartCard}>
         <h2 className={styles.chartTitle}>Daily Breakdown — Safe vs Phishing</h2>
         <ResponsiveContainer width="100%" height={200}>
@@ -183,8 +153,8 @@ export default function Dashboard() {
             <XAxis dataKey="date" tick={{ fill: "#64748b", fontSize: 11 }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fill: "#64748b", fontSize: 11 }} axisLine={false} tickLine={false} allowDecimals={false} />
             <Tooltip content={<CustomTooltip />} />
-            <Bar dataKey="safe"     name="Safe"     fill={SAFE_COLOR}  radius={[3,3,0,0]} maxBarSize={32} />
-            <Bar dataKey="phishing" name="Phishing" fill={PHISH_COLOR} radius={[3,3,0,0]} maxBarSize={32} />
+            <Bar dataKey="safe"     name="Safe"     fill={SAFE_COLOR}  radius={[4,4,0,0]} maxBarSize={32} />
+            <Bar dataKey="phishing" name="Phishing" fill={PHISH_COLOR} radius={[4,4,0,0]} maxBarSize={32} />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -19,11 +19,8 @@ export default function History() {
       setScans(res.data.scans);
       setTotal(res.data.total);
       setPages(res.data.pages);
-    } catch {
-      /* ignore */
-    } finally {
-      setLoading(false);
-    }
+    } catch { /* ignore */ }
+    finally { setLoading(false); }
   }, [page, verdict, search]);
 
   useEffect(() => { fetchHistory(); }, [fetchHistory]);
@@ -50,27 +47,24 @@ export default function History() {
     <div className={styles.page}>
       <div className={styles.header}>
         <div>
+          <span className={styles.pill}>Scan records</span>
           <h1 className={styles.title}>Scan History</h1>
-          <p className={styles.subtitle}>{total.toLocaleString()} total scans</p>
+          <p className={styles.subtitle}>{total.toLocaleString()} total scans in database</p>
         </div>
       </div>
 
-      {/* Filters */}
       <div className={styles.filters}>
         <form onSubmit={handleSearch} className={styles.searchForm}>
           <input
             className={styles.searchInput}
-            placeholder="Search URL..."
+            placeholder="Search by URL..."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
           <button className={styles.searchBtn} type="submit">Search</button>
           {search && (
-            <button
-              className={styles.clearSearch}
-              type="button"
-              onClick={() => { setSearch(""); setSearchInput(""); setPage(1); }}
-            >
+            <button className={styles.clearSearch} type="button"
+              onClick={() => { setSearch(""); setSearchInput(""); setPage(1); }}>
               Clear
             </button>
           )}
@@ -80,31 +74,26 @@ export default function History() {
           <button
             className={`${styles.filterBtn} ${verdict === "SAFE" ? styles.filterActive : ""}`}
             onClick={() => handleVerdictFilter("SAFE")}
-          >
-            Safe only
-          </button>
+          >Safe only</button>
           <button
             className={`${styles.filterBtn} ${verdict === "PHISHING" ? styles.filterActivePhish : ""}`}
             onClick={() => handleVerdictFilter("PHISHING")}
-          >
-            Phishing only
-          </button>
+          >Phishing only</button>
         </div>
       </div>
 
       {loading ? (
         <div className={styles.loadingWrap}>
           <div className={styles.spinner} />
-          Loading…
+          Loading history…
         </div>
       ) : scans.length === 0 ? (
         <div className={styles.empty}>
-          No scans found. Go check some URLs!
+          No scans found. Go check some URLs first!
         </div>
       ) : (
         <>
           <div className={styles.table}>
-            {/* Header */}
             <div className={`${styles.row} ${styles.rowHeader}`}>
               <span>URL</span>
               <span>Verdict</span>
@@ -124,12 +113,8 @@ export default function History() {
                     {isSafe(scan.verdict) ? "SAFE" : "PHISHING"}
                   </span>
                 </span>
-                <span className={styles.prob}>
-                  {(scan.p_legitimate * 100).toFixed(1)}%
-                </span>
-                <span className={styles.prob}>
-                  {(scan.p_phishing * 100).toFixed(1)}%
-                </span>
+                <span className={styles.prob}>{(scan.p_legitimate * 100).toFixed(1)}%</span>
+                <span className={styles.prob}>{(scan.p_phishing   * 100).toFixed(1)}%</span>
                 <span className={styles.date}>
                   {new Date(scan.scannedAt).toLocaleDateString()}{" "}
                   <span className={styles.time}>
@@ -137,38 +122,17 @@ export default function History() {
                   </span>
                 </span>
                 <span>
-                  <button
-                    className={styles.deleteBtn}
-                    onClick={() => handleDelete(scan._id)}
-                    title="Delete"
-                  >
-                    ✕
-                  </button>
+                  <button className={styles.deleteBtn} onClick={() => handleDelete(scan._id)} title="Delete">✕</button>
                 </span>
               </div>
             ))}
           </div>
 
-          {/* Pagination */}
           {pages > 1 && (
             <div className={styles.pagination}>
-              <button
-                className={styles.pageBtn}
-                disabled={page === 1}
-                onClick={() => setPage(page - 1)}
-              >
-                ← Prev
-              </button>
-              <span className={styles.pageInfo}>
-                Page {page} of {pages}
-              </span>
-              <button
-                className={styles.pageBtn}
-                disabled={page === pages}
-                onClick={() => setPage(page + 1)}
-              >
-                Next →
-              </button>
+              <button className={styles.pageBtn} disabled={page === 1}     onClick={() => setPage(page - 1)}>← Prev</button>
+              <span className={styles.pageInfo}>Page {page} of {pages}</span>
+              <button className={styles.pageBtn} disabled={page === pages} onClick={() => setPage(page + 1)}>Next →</button>
             </div>
           )}
         </>

@@ -12,27 +12,15 @@ export default function Bulk() {
 
   async function handleScan(e) {
     e.preventDefault();
-    const urls = text
-      .split("\n")
-      .map((u) => u.trim())
-      .filter(Boolean);
-
+    const urls = text.split("\n").map(u => u.trim()).filter(Boolean);
     if (urls.length === 0) return;
-    if (urls.length > 50) {
-      setError("Max 50 URLs at once.");
-      return;
-    }
-
-    setLoading(true);
-    setError("");
-    setResults([]);
-    setStats(null);
-
+    if (urls.length > 50) { setError("Max 50 URLs at once."); return; }
+    setLoading(true); setError(""); setResults([]); setStats(null);
     try {
       const res = await checkBulk(urls);
       const scans = res.data.scans;
       setResults(scans);
-      const phishing = scans.filter((s) => s.verdict === "PHISHING").length;
+      const phishing = scans.filter(s => s.verdict === "PHISHING").length;
       setStats({ total: scans.length, phishing, safe: scans.length - phishing });
     } catch (err) {
       setError(err.response?.data?.error || "Server error. Is the backend running?");
@@ -41,50 +29,44 @@ export default function Bulk() {
     }
   }
 
-  function handleClear() {
-    setText("");
-    setResults([]);
-    setStats(null);
-    setError("");
-  }
+  function handleClear() { setText(""); setResults([]); setStats(null); setError(""); }
 
   return (
     <div className={styles.page}>
-      <div className={styles.header}>
+      <div className={styles.top}>
+        <span className={styles.pill}>Batch analysis</span>
         <h1 className={styles.title}>Bulk URL Scanner</h1>
         <p className={styles.subtitle}>Paste up to 50 URLs — one per line</p>
       </div>
 
-      <form onSubmit={handleScan} className={styles.form}>
-        <textarea
-          className={styles.textarea}
-          rows={10}
-          placeholder={"https://www.google.com\nhttp://paypal-secure-login.tk/confirm\nhttps://github.com/openai/gpt-4"}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          spellCheck={false}
-        />
-        <div className={styles.actions}>
-          <span className={styles.count}>
-            {text.split("\n").filter((l) => l.trim()).length} URLs
-          </span>
-          <div className={styles.btns}>
-            <button type="button" className={styles.clearBtn} onClick={handleClear}>
-              Clear
-            </button>
-            <button className={styles.scanBtn} disabled={loading}>
-              {loading ? "Scanning…" : "Scan All"}
-            </button>
+      <div className={styles.card}>
+        <form onSubmit={handleScan} className={styles.form}>
+          <textarea
+            className={styles.textarea}
+            rows={10}
+            placeholder={"https://www.google.com\nhttp://paypal-secure-login.tk/confirm\nhttps://github.com/openai/gpt-4"}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            spellCheck={false}
+          />
+          <div className={styles.actions}>
+            <span className={styles.count}>{text.split("\n").filter(l => l.trim()).length} URLs entered</span>
+            <div className={styles.btns}>
+              <button type="button" className={styles.clearBtn} onClick={handleClear}>Clear</button>
+              <button className={styles.scanBtn} disabled={loading}>
+                {loading ? "Scanning…" : "Scan All"}
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
 
       {error && <div className={styles.error}>{error}</div>}
 
       {loading && (
         <div className={styles.loadingWrap}>
           <div className={styles.spinner} />
-          <span>Analyzing {text.split("\n").filter((l) => l.trim()).length} URLs…</span>
+          <span>Analyzing {text.split("\n").filter(l => l.trim()).length} URLs…</span>
         </div>
       )}
 
@@ -107,9 +89,7 @@ export default function Bulk() {
 
       {results.length > 0 && (
         <div className={styles.results}>
-          {results.map((scan, i) => (
-            <ResultCard key={i} scan={scan} />
-          ))}
+          {results.map((scan, i) => <ResultCard key={i} scan={scan} />)}
         </div>
       )}
     </div>

@@ -1,0 +1,228 @@
+.page { background: var(--bg); }
+
+.hero {
+  background: linear-gradient(145deg, #e8f0fe 0%, #f0f4ff 40%, #eef2f8 100%);
+  padding: 5rem 2rem;
+}
+
+.heroInner { max-width: 800px; margin: 0 auto; }
+
+.pill {
+  display: inline-block;
+  background: var(--blue-pale);
+  color: var(--blue);
+  border: 1px solid rgba(37,99,235,0.15);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 1.25rem;
+}
+
+.blue { color: var(--blue); }
+
+.desc {
+  font-size: 1.05rem;
+  color: var(--text2);
+  line-height: 1.75;
+  max-width: 680px;
+}
+
+.section    { padding: 5rem 2rem; background: var(--bg2); }
+.sectionAlt { padding: 5rem 2rem; background: #fff; }
+.sectionInner { max-width: 1000px; margin: 0 auto; }
+
+.secTitle {
+  font-family: var(--font-head);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.secDesc { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+
+/* Problem stats */
+.problemGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.problemCard {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.problemStat {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+
+.problemLabel {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Table */
+.tableWrap {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  margin-top: 1.5rem;
+}
+
+.table { width: 100%; border-collapse: collapse; }
+
+.table thead tr {
+  background: var(--navy);
+}
+
+.table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table td {
+  padding: 11px 16px;
+  font-size: 0.875rem;
+  color: var(--text2);
+  border-top: 1px solid var(--border);
+}
+
+.table tbody tr:nth-child(even) td { background: var(--bg); }
+.table tbody tr:hover td { background: var(--blue-pale); }
+
+.finalRow td {
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--blue-pale2) !important;
+}
+
+/* Stack */
+.stackGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.stackCard {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.stackLayer {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--blue-pale);
+}
+
+.stackItems { display: flex; flex-direction: column; gap: 6px; }
+
+.stackItem {
+  display: inline-block;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  color: var(--text2);
+}
+
+/* Team */
+.teamCard {
+  display: flex;
+  gap: 1.5rem;
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+  border: 1px solid var(--border);
+  margin-top: 1.5rem;
+  align-items: flex-start;
+}
+
+.teamAvatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--blue);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.teamName {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.teamRole {
+  font-size: 0.85rem;
+  color: var(--blue);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.teamDesc {
+  font-size: 0.875rem;
+  color: var(--text2);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.ghLink {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--blue);
+  transition: color 0.15s;
+}
+
+.ghLink:hover { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .problemGrid { grid-template-columns: repeat(2, 1fr); }
+  .stackGrid   { grid-template-columns: repeat(2, 1fr); }
+}
