@@ -45,9 +45,9 @@ def find_latest_model(results_dir):
             return pkl
     raise FileNotFoundError("No .pkl found. Run trainModel.py first.")
 
-RESULTS_DIR = find_results_dir(os.path.dirname(os.path.abspath(__file__)))
-MODEL_PATH  = find_latest_model(RESULTS_DIR)
-
+# RESULTS_DIR = find_results_dir(os.path.dirname(os.path.abspath(__file__)))
+# MODEL_PATH  = find_latest_model(RESULTS_DIR)
+MODEL_PATH=r"C:\Users\kinu\Downloads\ThreatLens-Web\ThreatLens-Web\ml_api\threatlens_phishing_ensemble.pkl"
 print(f"[ThreatLens] Loading model from: {MODEL_PATH}")
 BUNDLE    = joblib.load(MODEL_PATH)
 SCALER    = BUNDLE["scaler"]
